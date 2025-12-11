@@ -31,13 +31,11 @@ public class RegisterController implements Initializable {
     private TextField validateEmailField;
     @FXML
     private PasswordField passwordField;
-
     @FXML
     private PasswordField validatePasswordField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
     @FXML

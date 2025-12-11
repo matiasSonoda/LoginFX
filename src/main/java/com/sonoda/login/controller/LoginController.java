@@ -1,10 +1,12 @@
 package com.sonoda.login.controller;
 
+import com.sonoda.login.main;
 import com.sonoda.login.model.util.ConnectionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -25,10 +27,6 @@ public class LoginController implements Initializable{
     private TextField txtUser;
     @FXML
     private PasswordField txtPassword;
-    @FXML
-    private Button btnLogin;
-    @FXML
-    private Button registerButton;
 
     @FXML
     private Boolean loginUser(ActionEvent event){
@@ -50,8 +48,12 @@ public class LoginController implements Initializable{
 
                 ResultSet res = pstmt.executeQuery();
                 if(res.next()){
-                    System.out.println("Acceso concedido");
-                    return true;
+                    try{
+                        HomeController.switchHome(event);
+                        return true;
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
 
         }catch (SQLException e){
