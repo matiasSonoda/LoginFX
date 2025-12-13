@@ -1,16 +1,12 @@
 package com.sonoda.login.controller;
 
-import com.sonoda.login.main;
 import com.sonoda.login.model.util.ConnectionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -19,7 +15,6 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
-import java.util.logging.Logger;
 
 public class LoginController implements Initializable{
 
@@ -55,6 +50,12 @@ public class LoginController implements Initializable{
                         throw new RuntimeException(e);
                     }
                 }
+                else{
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                     alert.setTitle("Usuario y contraseña invalidos");
+                     alert.setContentText("Usuario y contraseña invalidos");
+                     alert.showAndWait();
+                }
 
         }catch (SQLException e){
             System.err.println("Error inicio de sesion: " + e.getMessage());
@@ -77,7 +78,7 @@ public class LoginController implements Initializable{
                 String name = resultSet.getString("username");
                 String pass = resultSet.getString("password");
 
-                System.out.println("id: " + id + "name: " + name + "password: " + pass);
+                System.out.println("id: " + id + " name: " + name + " password: " + pass);
 
             }
 

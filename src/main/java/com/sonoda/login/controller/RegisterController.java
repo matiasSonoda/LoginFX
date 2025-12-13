@@ -64,6 +64,14 @@ public class RegisterController implements Initializable {
             return;
         }
 
+        if(!EmailValidator.isValidEmail(email)){
+            Alert invalidEmail = new Alert(Alert.AlertType.ERROR);
+            invalidEmail.setTitle("Email invalido");
+            invalidEmail.setContentText("Ingresa un email valido (e.g., usuario@dominio.com)");
+            invalidEmail.showAndWait();
+            return;
+        }
+
         if(!email.equals(validateEmail)){
             Alert emailsNotEquals = new Alert(Alert.AlertType.WARNING);
             emailsNotEquals.setTitle("Emails: No son iguales");
@@ -72,13 +80,6 @@ public class RegisterController implements Initializable {
             return;
         }
 
-        if(!EmailValidator.isValidEmail(email)){
-            Alert invalidEmail = new Alert(Alert.AlertType.ERROR);
-            invalidEmail.setTitle("Email invalido");
-            invalidEmail.setContentText("Ingresa un email valido (e.g., usuario@dominio.com)");
-            invalidEmail.showAndWait();
-            return;
-        }
 
         List<String> passwordErrors = PasswordValidator.isPasswordValid(password);
         if (!passwordErrors.isEmpty()){
