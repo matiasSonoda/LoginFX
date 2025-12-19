@@ -1,5 +1,6 @@
 package com.sonoda.login.controller;
 
+import com.sonoda.login.model.UserEntity;
 import com.sonoda.login.model.util.ConnectionManager;
 import com.sonoda.login.model.util.EmailValidator;
 import com.sonoda.login.model.util.PasswordValidator;
@@ -41,14 +42,13 @@ public class RegisterController implements Initializable {
     @FXML
     public void register(ActionEvent event){
 
-
-        String user = userField.getText();
+        String username = userField.getText();
         String email = emailField.getText();
         String validateEmail = validateEmailField.getText();
         String password = passwordField.getText();
         String validatePassword = validatePasswordField.getText();
 
-        if (user.isEmpty() || email.isEmpty() || validateEmail.isEmpty() || password.isEmpty()){
+        if (username.isEmpty() || email.isEmpty() || validateEmail.isEmpty() || password.isEmpty()){
             Alert empty = new Alert(Alert.AlertType.WARNING);
             empty.setTitle("Campos de texto vacios");
             empty.setContentText("Complete los campos faltantes");
@@ -56,7 +56,7 @@ public class RegisterController implements Initializable {
             return;
         }
 
-        if(!UserValidator.isUserValid(user)){
+        if(!UserValidator.isUserValid(username)){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Usiario: ya existente");
             alert.setContentText("El usuario ya existe");
@@ -105,13 +105,18 @@ public class RegisterController implements Initializable {
             invalidPassword.setContentText("Ingresa un password valido: con al menos una minuscula, una mayuscula, un numero, un digito especial");
         }*/
 
-        String sql = "INSERT INTO `login_schema`.`users`(`username`,`password`) VALUES( ?, ?);";
+        String sql = "INSERT INTO `login_schema`.`users`(`username`,`password`,`email`) VALUES( ?, ?, ?);";
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
 
         try(Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ){
-            pstmt.setString(1,user);
-            pstmt.setString(2,password);
+            pstmt.setString(1,user.getUsername());
+            pstmt.setString(2,user.getPassword());
+            pstmt.setString(3,user.getEmail());
             int rowsAffected = pstmt.executeUpdate();
             if ( rowsAffected > 0){
                 System.out.println("Registro exitoso");
@@ -136,7 +141,6 @@ public class RegisterController implements Initializable {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-
     }
 
 

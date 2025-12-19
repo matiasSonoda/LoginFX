@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sonoda.login.controller.AdminController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" text="Administrator" textAlignment="CENTER" underline="true">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="10.0" prefWidth="50.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <TableView fx:id="tableView" prefHeight="270.0">
+              <columns>
+                <TableColumn fx:id="idTableColumn" prefWidth="65.0" text="ID" />
+                <TableColumn fx:id="usernameTableColumn" prefWidth="130.0" text="Username" />
+                  <TableColumn fx:id="passwordTableColumn" prefWidth="130.0" text="Password" />
+                  <TableColumn fx:id="emailTableColumn" prefWidth="211.0" text="Email" />
+              </columns>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TableView>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="reloadUsersButton" mnemonicParsing="false" prefHeight="51.0" prefWidth="130.0" text="Reload">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="deleteUserButtoon" mnemonicParsing="false" prefHeight="51.0" prefWidth="130.0" text="Delete user" />
+         </children>
+      </VBox>
+   </children>
+</HBox>

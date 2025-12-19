@@ -1,6 +1,7 @@
 package com.sonoda.login.model;
 
 public class UserEntity {
+    private Integer idUser;
     private String username;
     private String password;
     private String email;
@@ -8,7 +9,8 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(String username, String password, String email) {
+    public UserEntity(Integer idUser, String username, String password, String email) {
+        this.idUser = idUser;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -17,10 +19,19 @@ public class UserEntity {
     @Override
     public String toString() {
         return "UserEntity{" +
-                "username='" + username + '\'' +
+                "idUser='" + idUser + '\'' +
+                " username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Integer idUser) {
+        this.idUser = idUser;
     }
 
     public void setEmail(String email) {

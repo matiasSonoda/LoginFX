@@ -38,7 +38,7 @@ public class LoginController implements Initializable{
         String sql = "SELECT idusers FROM users WHERE BINARY username= ? AND password = ?;";
         try(Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);){
-                pstmt.setString(1,user);
+                pstmt.setString(1, user);
                 pstmt.setString(2, password);
 
                 ResultSet res = pstmt.executeQuery();
