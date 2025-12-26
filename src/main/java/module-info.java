@@ -7,4 +7,5 @@ module com.sonoda.login {
 
     opens com.sonoda.login.controller to javafx.fxml;
     exports com.sonoda.login;
+    opens com.sonoda.login.service to javafx.fxml;
 }
