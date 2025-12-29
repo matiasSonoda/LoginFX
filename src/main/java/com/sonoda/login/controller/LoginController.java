@@ -1,6 +1,7 @@
 package com.sonoda.login.controller;
 
 import com.sonoda.login.model.util.ConnectionManager;
+import com.sonoda.login.model.util.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,7 +45,8 @@ public class LoginController implements Initializable{
                 ResultSet res = pstmt.executeQuery();
                 if(res.next()){
                     try{
-                        HomeController.switchHome(event);
+                        SceneManager manager = SceneManager.getInstance();
+                        manager.switchTo("admin",event);
                         return true;
                     } catch (IOException e) {
                         throw new RuntimeException(e);

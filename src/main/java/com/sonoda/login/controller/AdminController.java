@@ -72,15 +72,6 @@ public class AdminController implements Initializable {
         }
 
     }
-
-    @FXML
-    public void switchAdminPage(ActionEvent event) throws IOException {
-        Stage adminStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(AdminController.class.getResource("/com/sonoda/login/admin.fxml"));
-        Scene adminScene = fxmlLoader.load();
-        adminStage.setScene(adminScene);
-    }
-
     @FXML
     public void deleteUser(ActionEvent event){
         Optional<UserEntity> user = Optional.ofNullable(tableView.getSelectionModel().getSelectedItem());
@@ -117,6 +108,4 @@ public class AdminController implements Initializable {
             }
         }
     }
-
-
 }

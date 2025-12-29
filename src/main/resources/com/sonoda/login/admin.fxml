@@ -52,7 +52,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="deleteUserButtoon" mnemonicParsing="false" prefHeight="51.0" prefWidth="130.0" text="Delete user" />
+            <Button fx:id="deleteUserButtoon" mnemonicParsing="false" prefHeight="51.0" prefWidth="130.0" text="Delete user" onAction="#deleteUser"/>
          </children>
       </VBox>
    </children>

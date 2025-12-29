@@ -26,7 +26,6 @@ public class Main extends Application {
                 String sql = "SELECT * FROM users";
                 preparedStatement = connection.prepareStatement(sql);
                 resultSet = preparedStatement.executeQuery();
-
                 while(resultSet.next()){
                     int id = resultSet.getInt("idusers");
                     String name = resultSet.getString("username");
