@@ -2,31 +2,24 @@ package com.sonoda.login.controller;
 
 import com.sonoda.login.model.UserEntity;
 import com.sonoda.login.model.UserNotFoundException;
-import com.sonoda.login.model.util.ConnectionManager;
 import com.sonoda.login.service.UserService;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-import javafx.stage.Window;
+import javafx.util.Pair;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.sql.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class AdminController implements Initializable {
+
+    private static final Logger LOGGER = Logger.getLogger(UserService.class.getName());
 
     @FXML
     public TableColumn<UserEntity,Integer> idTableColumn;
@@ -44,34 +37,41 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        String sql = "SELECT * FROM users";
-        ObservableList<UserEntity> userList = FXCollections.observableArrayList();
-        try(Connection conn = ConnectionManager.getConnection();){
-            Statement stmt = conn.createStatement();
-            ResultSet resultSet = stmt.executeQuery(sql);
-            while (resultSet.next()){
-                UserEntity user = new UserEntity(
-                        resultSet.getInt("idusers"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("email")
-                );
-                userList.add(user);
-            }
-            idTableColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdUser()).asObject());
-            usernameTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
-            passwordTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
-            emailTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
-            tableView.setItems(userList);
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error to connect Database");
-            alert.setContentText("Error to connect Database:" + e.getMessage());
-            alert.showAndWait();
-            throw new RuntimeException(e);
-        }
-
+        idTableColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdUser()).asObject());
+        usernameTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
+        passwordTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
+        emailTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
+        loadUsers();
     }
+
+    @FXML
+    public void getUsers(ActionEvent event ){
+        loadUsers();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Update table");
+        alert.setContentText("updated table successfully");
+        alert.showAndWait();
+    }
+
+    private void loadUsers(){
+        Pair<ObservableList<UserEntity>, String> result = userService.getUsers();
+        if ("Error to connect Database: ...".equals(result.getValue())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Database");
+            alert.setContentText(result.getValue());
+            alert.showAndWait();
+            return;
+        }
+        ObservableList<UserEntity> userList = result.getKey();
+        tableView.setItems(userList);
+        if("No users found".equals(result.getValue())){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Database");
+            alert.setContentText("User list is empty");
+            alert.showAndWait();
+        }
+    }
+
     @FXML
     public void deleteUser(ActionEvent event){
         Optional<UserEntity> user = Optional.ofNullable(tableView.getSelectionModel().getSelectedItem());

@@ -47,7 +47,7 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="reloadUsersButton" mnemonicParsing="false" prefHeight="51.0" prefWidth="130.0" text="Reload">
+            <Button fx:id="reloadUsersButton" mnemonicParsing="false" prefHeight="51.0" prefWidth="130.0" text="Reload" onAction="#getUsers">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
