@@ -22,7 +22,7 @@ public class SceneManager {
         routes.put("home","/com/sonoda/login/home.fxml");
         routes.put("admin","/com/sonoda/login/admin.fxml");
         routes.put("register","/com/sonoda/login/register.fxml");
-
+        routes.put("registerAdmin","/com/sonoda/login/registerAdmin.fxml");
     }
 
     public static SceneManager getInstance(){

@@ -1,5 +1,6 @@
 package com.sonoda.login.service;
 
+import com.sonoda.login.model.Rol;
 import com.sonoda.login.model.UserEntity;
 import com.sonoda.login.model.UserNotFoundException;
 import com.sonoda.login.model.util.ConnectionManager;
@@ -33,7 +34,8 @@ public class UserService {
                         resultSet.getInt("idusers"),
                         resultSet.getString("username"),
                         resultSet.getString("password"),
-                        resultSet.getString("email")
+                        resultSet.getString("email"),
+                        Rol.valueOf(resultSet.getString("rol").toUpperCase())
                 );
                 userList.add(user);
             }

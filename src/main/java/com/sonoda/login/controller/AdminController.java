@@ -30,7 +30,10 @@ public class AdminController implements Initializable {
     @FXML
     public TableColumn<UserEntity,String> emailTableColumn;
     @FXML
+    public TableColumn<UserEntity, String> rolTableColumn;
+    @FXML
     public TableView<UserEntity> tableView;
+
 
     UserService userService = new UserService();
 
@@ -41,6 +44,7 @@ public class AdminController implements Initializable {
         usernameTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
         passwordTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
         emailTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
+        rolTableColumn.setCellValueFactory(cellData-> new SimpleStringProperty(cellData.getValue().getRol().toString().toUpperCase()));
         loadUsers();
     }
 

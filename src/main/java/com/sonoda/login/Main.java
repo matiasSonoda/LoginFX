@@ -46,7 +46,6 @@ public class Main extends Application {
                 e.printStackTrace();
             }
         }
-
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);

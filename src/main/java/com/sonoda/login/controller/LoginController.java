@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
@@ -31,8 +32,8 @@ public class LoginController implements Initializable{
         System.out.println("user: " + user + "password: " + password );
         if(user.isEmpty() || password.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error: casilleros vacios");
-            alert.setContentText("Error: Casilleros vacios, rellenelos.");
+            alert.setTitle("Error: empty lockers");
+            alert.setContentText("Error: Empty fields, please fill them in.");
             alert.showAndWait();
             return false;
         }
@@ -54,13 +55,13 @@ public class LoginController implements Initializable{
                 }
                 else{
                     Alert alert = new Alert(Alert.AlertType.WARNING);
-                     alert.setTitle("Usuario y contraseña invalidos");
-                     alert.setContentText("Usuario y contraseña invalidos");
+                     alert.setTitle("Invalid username and password");
+                     alert.setContentText("Invalid username and password");
                      alert.showAndWait();
                 }
 
         }catch (SQLException e){
-            System.err.println("Error inicio de sesion: " + e.getMessage());
+            System.err.println("Login error: " + e.getMessage());
             e.printStackTrace();
         }
         return false;
@@ -115,12 +116,8 @@ public class LoginController implements Initializable{
 
 @FXML
 private void switchPage(ActionEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(LoginController.class.getResource("/com/sonoda/login/register.fxml"));
-    Scene registerScene = new Scene(fxmlLoader.load());
-    Stage registerStage = new Stage();
-    registerStage.setScene(registerScene);
-    registerStage.initModality(Modality.APPLICATION_MODAL);
-    registerStage.show();
+    SceneManager sceneManager = SceneManager.getInstance();
+    sceneManager.switchToNewStage("registerAdmin", (Stage) ((Node)event.getSource()).getScene().getWindow());
 }
 
 }

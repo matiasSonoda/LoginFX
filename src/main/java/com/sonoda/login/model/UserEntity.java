@@ -5,24 +5,28 @@ public class UserEntity {
     private String username;
     private String password;
     private String email;
+    private Rol rol;
 
     public UserEntity() {
     }
 
-    public UserEntity(Integer idUser, String username, String password, String email) {
+
+    public UserEntity(Integer idUser, String username, String password, String email, Rol rol) {
         this.idUser = idUser;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.rol = rol;
     }
 
     @Override
     public String toString() {
         return "UserEntity{" +
-                "idUser='" + idUser + '\'' +
-                " username='" + username + '\'' +
+                "idUser=" + idUser +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", rol=" + rol +
                 '}';
     }
 
@@ -57,4 +61,7 @@ public class UserEntity {
     public String getEmail() {
         return email;
     }
+
+    public Rol getRol() {return rol;}
+    public void setRol(Rol rol) {this.rol = rol;}
 }

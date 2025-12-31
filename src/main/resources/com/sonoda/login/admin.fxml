@@ -28,10 +28,11 @@
             </HBox>
             <TableView fx:id="tableView" prefHeight="270.0">
               <columns>
-                <TableColumn fx:id="idTableColumn" prefWidth="65.0" text="ID" />
-                <TableColumn fx:id="usernameTableColumn" prefWidth="130.0" text="Username" />
-                  <TableColumn fx:id="passwordTableColumn" prefWidth="130.0" text="Password" />
-                  <TableColumn fx:id="emailTableColumn" prefWidth="211.0" text="Email" />
+                <TableColumn fx:id="idTableColumn" prefWidth="38.0" text="ID" />
+                <TableColumn fx:id="usernameTableColumn" prefWidth="116.0" text="Username" />
+                  <TableColumn fx:id="passwordTableColumn" prefWidth="134.0" text="Password" />
+                  <TableColumn fx:id="emailTableColumn" prefWidth="144.0" text="Email" />
+                  <TableColumn fx:id="rolTableColumn" minWidth="0.0" prefWidth="104.0" text="Rol" />
               </columns>
                <VBox.margin>
                   <Insets />
@@ -47,12 +48,12 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Button fx:id="reloadUsersButton" mnemonicParsing="false" prefHeight="51.0" prefWidth="130.0" text="Reload" onAction="#getUsers">
+            <Button fx:id="reloadUsersButton" mnemonicParsing="false" onAction="#getUsers" prefHeight="51.0" prefWidth="130.0" text="Reload">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="deleteUserButtoon" mnemonicParsing="false" prefHeight="51.0" prefWidth="130.0" text="Delete user" onAction="#deleteUser"/>
+            <Button fx:id="deleteUserButtoon" mnemonicParsing="false" onAction="#deleteUser" prefHeight="51.0" prefWidth="130.0" text="Delete user" />
          </children>
       </VBox>
    </children>
